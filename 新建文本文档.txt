@@ -1,0 +1,10 @@
+# 生成tf文件
+python build_data.py --X_input_dir datasets/a_resized --Y_input_dir datasets/b_resized --X_output_file datasets/mingwen.tfrecords --Y_output_file datasets/miwen.tfrecords
+
+python train.py  --X datasets/mingwen.tfrecords --Y datasets/miwen.tfrecords --image_size 256
+
+python export_graph.py --checkpoint_dir checkpoints/20190520-1134 --XtoY_model mingwen_to_miwen.pb --YtoX_model miwen_to_mingwen.pb --image_size 256
+
+python inference.py --model pretrained/mingwen_to_miwen.pb --input data/3.png --output data/output_3.png --image_size 256
+
+python inference.py --model pretrained/miwen_to_mingwen.pb --input data/output_3.jpg --output data/rebuil_3.jpg --image_size 256
