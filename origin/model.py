@@ -64,18 +64,18 @@ class CycleGAN:
   def model(self):
     X_reader = Reader(self.X_train_file, name='X',
         image_size=self.image_size, batch_size=self.batch_size)
-    # Y_reader = Reader(self.Y_train_file, name='Y',
-    #     image_size=self.image_size, batch_size=self.batch_size)
+    Y_reader = Reader(self.Y_train_file, name='Y',
+        image_size=self.image_size, batch_size=self.batch_size)
 
-    x, y = X_reader.feed()
-    # y = Y_reader.feed()
+    x = X_reader.feed()
+    y = Y_reader.feed()
 
     cycle_loss = self.cycle_consistency_loss(self.G, self.F, x, y)
 
     # X -> Y
     fake_y = self.G(x)
-    # G_gan_loss = self.generator_loss(self.D_Y, fake_y, use_lsgan=self.use_lsgan)
-    G_gan_loss = self.L1_loss(fake_y, y)
+    G_gan_loss = self.generator_loss(self.D_Y, fake_y, use_lsgan=self.use_lsgan)
+    # G_gan_loss = self.L1_loss(fake_y, y)
     G_loss = G_gan_loss
     # G_loss = G_gan_loss + cycle_loss
              # + 0.5 * self.entropy_loss(x)
@@ -87,7 +87,7 @@ class CycleGAN:
 
     # Y -> X
     fake_x = self.F(y)
-    F_gan_loss = self.generator_loss(self.D_X, fake_x, use_lsgan=self.use_lsgan)
+    F_gan_loss = self.L1_loss(fake_x, x)
     F_loss = F_gan_loss
     # F_loss = F_gan_loss + cycle_loss
              # + 0.5 * self.entropy_loss(y)
