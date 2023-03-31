@@ -1,4 +1,4 @@
-# BEDN
+# BEDN: Backdoor Encryption and Decryption Network
 
 ## Folder Explanations
 1. Trigger: Contains the implementation of triggers, which are used to activate specific behaviors or events in a system.
