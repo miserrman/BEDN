@@ -105,7 +105,7 @@ class CycleGAN:
 
         # Y -> X
         fake_x = self.F(y)
-        F_gan_loss = self.generator_loss(self.D_X, fake_x, use_lsgan=self.use_lsgan)
+        F_gan_loss = self.L1_loss(fake_x, x)
         F_loss = F_gan_loss
         # F_loss = F_gan_loss + cycle_loss
         # + 0.5 * self.entropy_loss(y)
@@ -241,6 +241,10 @@ class CycleGAN:
         loss = self.lambda1 * forward_loss + self.lambda2 * backward_loss
         return loss
 
+    def L1_loss(self, fake_y, y):
+        L1_loss = tf.reduce_mean(tf.abs(fake_y - y))
+        loss = self.lambda1 * L1_loss
+        return loss
     # def L1_loss(self, G, x, y):
     #   L1_loss = tf.reduce_mean(tf.abs(G(x) - y))
     #   loss = self.lambda1*L1_loss
