@@ -23,7 +23,7 @@ tf.flags.DEFINE_float('beta1', 0.8,
                       'momentum term of Adam, default: 0.5')
 tf.flags.DEFINE_float('pool_size', 50,
                       'size of image buffer that stores previously generated images, default: 50')
-tf.flags.DEFINE_integer('ngf', 8,
+tf.flags.DEFINE_integer('ngf', 4,
                         'number of gen filters in first conv layer, default: 64')
 
 tf.flags.DEFINE_string('X', '../datasets/attack_mingwen.tfrecords',

@@ -7,7 +7,7 @@ from attack_model.model.sub_generator import Generator
 import numpy as np
 import ml_collections
 
-REAL_LABEL = 0.9
+REAL_LABEL = 1.0
 FLAGS = tf.flags.FLAGS
 
 class SubCycleGANNet:
