@@ -100,6 +100,8 @@ class CycleGAN:
     tf.summary.histogram('D_X/true', self.D_X(x))
     tf.summary.histogram('D_X/fake', self.D_X(self.F(y)))
 
+
+
     tf.summary.scalar('loss/G', G_gan_loss)
     tf.summary.scalar('loss/D_Y', D_Y_loss)
     tf.summary.scalar('loss/F', F_gan_loss)

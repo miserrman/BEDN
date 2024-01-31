@@ -103,6 +103,8 @@ class CycleGAN:
 
         D_Y_loss = self.discriminator_loss(self.D_Y, y, self.fake_y, use_lsgan=self.use_lsgan)
 
+
+
         # Y -> X
         fake_x = self.F(fake_y)
         F_gan_loss = self.L1_loss(fake_x, x)
